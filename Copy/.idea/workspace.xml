@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="faaa2cb8-e44c-4c78-a56c-7e6f17aa8c02" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Copy" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1hcD0qeSQSm4ZJd9h6ldxQduHZY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Copy" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="copy.Copy" />
+      <module name="Copy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Copy" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="faaa2cb8-e44c-4c78-a56c-7e6f17aa8c02" name="Default Changelist" comment="" />
+      <created>1600301266987</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600301266987</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="771" y="296" key="FileChooserDialogImpl" timestamp="1600314010318">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2691" y="296" key="FileChooserDialogImpl/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@1982.0.1858.1080" timestamp="1600304538811" />
+    <state x="771" y="296" key="FileChooserDialogImpl/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600314010318" />
+    <state width="1815" height="295" key="GridCell.Tab.0.bottom" timestamp="1600307997865">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1796" height="295" key="GridCell.Tab.0.bottom/-1839.0.1839.1080/81.0.1839.1080/1982.0.1858.1080@81.0.1839.1080" timestamp="1600301462197" />
+    <state width="1815" height="295" key="GridCell.Tab.0.bottom/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307997865" />
+    <state width="1815" height="295" key="GridCell.Tab.0.center" timestamp="1600307997865">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1796" height="295" key="GridCell.Tab.0.center/-1839.0.1839.1080/81.0.1839.1080/1982.0.1858.1080@81.0.1839.1080" timestamp="1600301462197" />
+    <state width="1815" height="295" key="GridCell.Tab.0.center/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307997865" />
+    <state width="1815" height="295" key="GridCell.Tab.0.left" timestamp="1600307997865">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1796" height="295" key="GridCell.Tab.0.left/-1839.0.1839.1080/81.0.1839.1080/1982.0.1858.1080@81.0.1839.1080" timestamp="1600301462196" />
+    <state width="1815" height="295" key="GridCell.Tab.0.left/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307997865" />
+    <state width="1815" height="295" key="GridCell.Tab.0.right" timestamp="1600307997865">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state width="1796" height="295" key="GridCell.Tab.0.right/-1839.0.1839.1080/81.0.1839.1080/1982.0.1858.1080@81.0.1839.1080" timestamp="1600301462197" />
+    <state width="1815" height="295" key="GridCell.Tab.0.right/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307997865" />
+    <state x="471" y="115" key="SettingsEditor" timestamp="1600307115816">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2391" y="115" key="SettingsEditor/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@1982.0.1858.1080" timestamp="1600304740953" />
+    <state x="471" y="115" key="SettingsEditor/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307115816" />
+    <state x="2632" y="281" width="570" height="524" key="StructurePopup" timestamp="1600304048931">
+      <screen x="1982" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2632" y="281" width="570" height="524" key="StructurePopup/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@1982.0.1858.1080" timestamp="1600304048931" />
+    <state x="2607" y="365" key="com.intellij.ide.util.TipDialog" timestamp="1600304650454">
+      <screen x="1982" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2607" y="365" key="com.intellij.ide.util.TipDialog/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@1982.0.1858.1080" timestamp="1600304650454" />
+    <state x="373" y="161" key="new project wizard" timestamp="1600314012337">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="373" y="161" key="new project wizard/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600314012337" />
+    <state x="654" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1600307141992">
+      <screen x="62" y="0" width="1858" height="1080" />
+    </state>
+    <state x="2574" y="235" width="672" height="678" key="search.everywhere.popup/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@1982.0.1858.1080" timestamp="1600304595088" />
+    <state x="654" y="235" width="672" height="678" key="search.everywhere.popup/-1858.0.1858.1080/62.0.1858.1080/1982.0.1858.1080@62.0.1858.1080" timestamp="1600307141992" />
+  </component>
+</project>
