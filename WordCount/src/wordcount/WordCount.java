@@ -9,14 +9,22 @@ public class WordCount {
     }
 
     public static void main(String[] args) {
+        if (args.length == 1 && (args[0].equals("-?") || args[0].equals("-h") || args[0].equals("-help"))) {
+            System.out.println("Usage: wordcount.WordCount <src>");
+            System.out.println("Examples:");
+            System.out.println("\twordcount.WordCount file1.txt");
+            System.out.println("\twordcount.WordCount program1.java");
+            return;
+        }
+
+        if (args.length != 1) {
+            System.out.println("Usage: wordcount.WordCount <src>\n");
+            return;
+        }
+
         String srcFileName = null;
         FileInputStream fileInputStream = null;
         BufferedReader reader = null;
-
-        if (args.length != 1) {
-            System.out.println("Usage: CharCount <src>\n");
-            return;
-        }
 
         if (args[0] != null) {
             try {
