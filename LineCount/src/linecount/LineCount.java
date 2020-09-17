@@ -4,14 +4,22 @@ import java.io.*;
 
 public class LineCount {
     public static void main(String[] args) {
+        if (args.length == 1 && (args[0].equals("-?") || args[0].equals("-h") || args[0].equals("-help"))) {
+            System.out.println("Usage: charcount.CharCount <src>");
+            System.out.println("Examples:");
+            System.out.println("\tcharcount.CharCount file1.txt");
+            System.out.println("\tcharcount.CharCount program1.java");
+            return;
+        }
+
+        if (args.length != 1) {
+            System.out.println("Usage: charcount.CharCount <src>\n");
+            return;
+        }
+
         String srcFileName = null;
         FileInputStream fileInputStream = null;
         BufferedReader reader = null;
-
-        if (args.length != 1) {
-            System.out.println("Usage: CharCount <src>\n");
-            return;
-        }
 
         if (args[0] != null) {
             try {
