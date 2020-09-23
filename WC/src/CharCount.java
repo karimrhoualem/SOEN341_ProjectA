@@ -6,8 +6,8 @@ public class CharCount {
         FileInputStream fileInputStream = null;
         BufferedReader reader = null;
 
-        if (args[0] != null) {
-            try {
+        try {
+            if (args[0] != null) {
                 int count = 0;
 
                 srcFileName = args[0];
@@ -20,23 +20,41 @@ public class CharCount {
 
                 System.out.println("Total characters read: " + count + ".");
             }
-            catch (FileNotFoundException fnfe) {
-                fnfe.printStackTrace();
+        }
+        catch (FileNotFoundException fnfe) {
+            System.out.println(fnfe.getMessage());
+            Administrator.Messages.HelpMessage();
+        }
+        catch (IOException ioe) {
+            System.out.println(ioe.getMessage());
+            Administrator.Messages.HelpMessage();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            Administrator.Messages.HelpMessage();
+        }
+        finally {
+            try {
+                reader.close();
+                fileInputStream.close();
+            }
+            catch (NullPointerException npe) {
+                if (npe.getMessage() != null) {
+                    System.out.println(npe.getMessage());
+                }
+                System.exit(0);
             }
             catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                try {
-                    reader.close();
-                    fileInputStream.close();
+                if (ioe.getMessage() != null) {
+                    System.out.println(ioe.getMessage());
                 }
-                catch (IOException ioe) {
-                    ioe.printStackTrace();
+                System.exit(0);
+            }
+            catch(Exception e) {
+                if (e.getMessage() != null) {
+                    System.out.println(e.getMessage());
                 }
+                System.exit(0);
             }
         }
     }

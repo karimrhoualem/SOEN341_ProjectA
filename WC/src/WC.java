@@ -1,22 +1,20 @@
+import java.io.IOException;
+
 public class WC {
-    public static void main(String[] args) {
-        if (args.length == 1 && (args[0].equals("-?") || args[0].equals("-h") || args[0].equals("-help"))) {
-            System.out.println("Usage: WC <src>");
-            System.out.println("Examples:");
-            System.out.println("\tWC file1.txt");
-            System.out.println("\tWC program1.java");
+    public static void main(String[] args) throws IOException {
+        if (Administrator.CheckArgsConditions.isHelpOption(args)) {
+            Administrator.Messages.HelpMessage();
             return;
         }
 
-        if (args.length != 1) {
-            System.out.println("Usage: WC <src>\n");
+        if (Administrator.CheckArgsConditions.isIncorrectArgLength(args)) {
+            Administrator.Messages.InvalidNumberOfArgs();
+            Administrator.Messages.UsageMessage();
             return;
         }
 
-        if (args[0] != null) {
-            CharCount.CountCharacters(args);
-            WordCount.CountWords(args);
-            LineCount.CountLines(args);
+        if (Administrator.CheckArgsConditions.isArgNotNull(args)) {
+            Administrator.Messages.PrintInformation(args);
         }
     }
 }
