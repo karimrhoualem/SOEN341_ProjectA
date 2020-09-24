@@ -3,15 +3,28 @@ import java.io.*;
 public class WC {
     public static void main(String[] args) {
         if (args.length == 1 && (args[0].equals("-?") || args[0].equals("-h") || args[0].equals("-help"))) {
-            System.out.println("Usage: WC <src>");
+            System.out.println("Usage:");
+            System.out.println("\tjava WC <src>\n");
+            System.out.println("Help Options:");
+            System.out.println("\tjava WC -h" + "\tor,");
+            System.out.println("\tjava WC -?" + "\tor,");
+            System.out.println("\tjava WC -help\n");
             System.out.println("Examples:");
-            System.out.println("\tWC file1.txt");
-            System.out.println("\tWC program1.java");
+            System.out.println("\tjava WC file1.txt");
+            System.out.println("\tjava WC program1.java\n");
             return;
         }
 
         if (args.length != 1) {
-            System.out.println("Usage: WC <src>\n");
+            System.out.println("Usage:");
+            System.out.println("\tjava WC <src>\n");
+            System.out.println("Help Options:");
+            System.out.println("\tjava WC -h" + "\tor,");
+            System.out.println("\tjava WC -?" + "\tor,");
+            System.out.println("\tjava WC -help\n");
+            System.out.println("Examples:");
+            System.out.println("\tjava WC file1.txt");
+            System.out.println("\tjava WC program1.java\n");
             return;
         }
 
