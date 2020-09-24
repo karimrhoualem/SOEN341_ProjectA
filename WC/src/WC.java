@@ -16,6 +16,7 @@ public class WC {
         }
 
         if (args.length != 1) {
+            System.out.println("Error: Incorrect number of arguments provided at command line.\n");
             System.out.println("Usage:");
             System.out.println("\tjava WC <src>\n");
             System.out.println("Help Options:");
@@ -29,14 +30,9 @@ public class WC {
         }
 
         if (args[0] != null) {
-            try {
-                CharCount(args[0]);
-                WordCount(args[0]);
-                LineCount(args[0]);
-            }
-            catch (Exception e) {
-
-            }
+            CharCount(args[0]);
+            WordCount(args[0]);
+            LineCount(args[0]);
         }
     }
 
