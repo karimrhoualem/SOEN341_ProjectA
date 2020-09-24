@@ -3,29 +3,13 @@ import java.io.*;
 public class WC {
     public static void main(String[] args) {
         if (args.length == 1 && (args[0].equals("-?") || args[0].equals("-h") || args[0].equals("-help"))) {
-            System.out.println("Usage:");
-            System.out.println("\tjava WC <src>\n");
-            System.out.println("Help Options:");
-            System.out.println("\tjava WC -h" + "\tor,");
-            System.out.println("\tjava WC -?" + "\tor,");
-            System.out.println("\tjava WC -help\n");
-            System.out.println("Examples:");
-            System.out.println("\tjava WC file1.txt");
-            System.out.println("\tjava WC program1.java\n");
+            PrintHelpMessage();
             return;
         }
 
         if (args.length != 1) {
             System.out.println("Error: Incorrect number of arguments provided at command line.\n");
-            System.out.println("Usage:");
-            System.out.println("\tjava WC <src>\n");
-            System.out.println("Help Options:");
-            System.out.println("\tjava WC -h" + "\tor,");
-            System.out.println("\tjava WC -?" + "\tor,");
-            System.out.println("\tjava WC -help\n");
-            System.out.println("Examples:");
-            System.out.println("\tjava WC file1.txt");
-            System.out.println("\tjava WC program1.java\n");
+            PrintHelpMessage();
             return;
         }
 
@@ -34,6 +18,18 @@ public class WC {
             WordCount(args[0]);
             LineCount(args[0]);
         }
+    }
+
+    public static void PrintHelpMessage() {
+        System.out.println("Usage:");
+        System.out.println("\tjava WC <src>\n");
+        System.out.println("Help Options:");
+        System.out.println("\tjava WC -h" + "\tor,");
+        System.out.println("\tjava WC -?" + "\tor,");
+        System.out.println("\tjava WC -help\n");
+        System.out.println("Examples:");
+        System.out.println("\tjava WC file1.txt");
+        System.out.println("\tjava WC program1.java\n");
     }
 
     public static void CharCount(String args) {
@@ -56,21 +52,27 @@ public class WC {
                 System.out.println("Total characters read: " + count + ".");
             }
             catch (FileNotFoundException fnfe) {
-                fnfe.printStackTrace();
+                System.out.println(fnfe.getMessage());
+                PrintHelpMessage();
             }
             catch (IOException ioe) {
-                ioe.printStackTrace();
+                System.out.println(ioe.getMessage());
+                PrintHelpMessage();
             }
             catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                PrintHelpMessage();
             }
             finally {
                 try {
                     reader.close();
                     fileInputStream.close();
                 }
-                catch (IOException ioe) {
-                    ioe.printStackTrace();
+                catch (NullPointerException | IOException npe) {
+                    if (npe.getMessage() != null) {
+                        System.out.println(npe.getMessage());
+                    }
+                    System.exit(0);
                 }
             }
         }
@@ -109,21 +111,27 @@ public class WC {
                 System.out.println("Total words read: " + nWords + ".");
             }
             catch (FileNotFoundException fnfe) {
-                fnfe.printStackTrace();
+                System.out.println(fnfe.getMessage());
+                PrintHelpMessage();
             }
             catch (IOException ioe) {
-                ioe.printStackTrace();
+                System.out.println(ioe.getMessage());
+                PrintHelpMessage();
             }
             catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                PrintHelpMessage();
             }
             finally {
                 try {
                     reader.close();
                     fileInputStream.close();
                 }
-                catch (IOException ioe) {
-                    ioe.printStackTrace();
+                catch (NullPointerException | IOException npe) {
+                    if (npe.getMessage() != null) {
+                        System.out.println(npe.getMessage());
+                    }
+                    System.exit(0);
                 }
             }
         }
@@ -151,21 +159,27 @@ public class WC {
                 System.out.println("Total line count is: " + count + ".");
             }
             catch (FileNotFoundException fnfe) {
-                fnfe.printStackTrace();
+                System.out.println(fnfe.getMessage());
+                PrintHelpMessage();
             }
             catch (IOException ioe) {
-                ioe.printStackTrace();
+                System.out.println(ioe.getMessage());
+                PrintHelpMessage();
             }
             catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getMessage());
+                PrintHelpMessage();
             }
             finally {
                 try {
                     reader.close();
                     fileInputStream.close();
                 }
-                catch (IOException ioe) {
-                    ioe.printStackTrace();
+                catch (NullPointerException | IOException npe) {
+                    if (npe.getMessage() != null) {
+                        System.out.println(npe.getMessage());
+                    }
+                    System.exit(0);
                 }
             }
         }
