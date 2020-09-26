@@ -1,14 +1,14 @@
-package CounterFactory;
+package factory;
 
-import CounterAdministratorTemplate.Administrator;
-import CounterCommandLineStrategy.BannerCommandLineOption;
-import CounterCommandLineStrategy.HelpCommandLineOption;
-import CounterCommandLineStrategy.NoCommandLineOption;
-import CounterCommandLineStrategy.VerboseCommandLineOption;
+import administrator_template.Administrator;
+import command_line_strategy.BannerCommandLineOption;
+import command_line_strategy.HelpCommandLineOption;
+import command_line_strategy.NoCommandLineOption;
+import command_line_strategy.VerboseCommandLineOption;
 
 import java.io.*;
 
-public class LineCounter extends Administrator implements ICounter {
+public class CountChars extends Administrator implements IRunFactory {
     private int _count;
 
     HelpCommandLineOption helpCommandLineOption = new HelpCommandLineOption();
@@ -20,8 +20,10 @@ public class LineCounter extends Administrator implements ICounter {
     FileInputStream fileInputStream = null;
     BufferedReader reader = null;
 
-    public void Count(String[] args) {
+    @Override
+    public void CheckConditions(String[] args) {
         try {
+            // Verify whether help or banner option has been specified from the command line.
             if (helpCommandLineOption.CheckOption(args)) {
                 UsageMessage();
                 return;
@@ -32,11 +34,11 @@ public class LineCounter extends Administrator implements ICounter {
             }
 
             if (verboseCommandLineOption.CheckOption(args)) {
-                RunCounter(args);
+                Run(args);
                 return;
             }
             else if (noCommandLineOption.CheckOption(args)) {
-                RunCounter(args);
+                Run(args);
                 return;
             }
 
@@ -84,7 +86,7 @@ public class LineCounter extends Administrator implements ICounter {
     }
 
     @Override
-    public void RunCounter(String[] args) throws IOException {
+    public void Run(String[] args) throws IOException {
         if (args.length == 1) {
             srcFileName = args[0];
             fileInputStream = new FileInputStream((srcFileName));
@@ -92,13 +94,11 @@ public class LineCounter extends Administrator implements ICounter {
 
             _count = 0;
 
-            String line = reader.readLine();
-            while (line != null) {
+            while (reader.read() != -1) {
                 _count++;
-                line = reader.readLine();
             }
 
-            System.out.println("Total line count is: " + _count + ".");
+            System.out.println("Total characters read: " + _count + ".");
         }
         else if (args.length == 2) {
             srcFileName = args[1];
@@ -107,13 +107,11 @@ public class LineCounter extends Administrator implements ICounter {
 
             _count = 0;
 
-            String line = reader.readLine();
-            while (line != null) {
+            while (reader.read() != -1) {
                 _count++;
-                line = reader.readLine();
             }
 
-            System.out.println("Total line count is: " + _count + ".");
+            System.out.println("Total characters read: " + _count + ".");
             Verbose(_count);
         }
     }
@@ -121,15 +119,15 @@ public class LineCounter extends Administrator implements ICounter {
     @Override
     public void Verbose(int count) {
         for (int i = 0; i < count; i++) {
-            System.out.print('L');
+            System.out.print('C');
         }
     }
 
     @Override
     public void GeneralUsageInformation() {
-        System.out.println("LineCount <src>\t" + "Passed with one file source as an argument and no options. Displays information about the file.");
+        System.out.println("CharCount <src>\t" + "Passed with one file source as an argument and no options. Displays information about the file.");
         System.out.println("General Usage Examples:");
-        System.out.println("\tjava LineCount file1.txt");
+        System.out.println("\tjava CharCount file1.txt");
         System.out.println();
     }
 
@@ -137,9 +135,9 @@ public class LineCounter extends Administrator implements ICounter {
     public void HelpOptionInformation() {
         System.out.println("-h, -?, -help\t" + "Passed with no arguments and displays helpful information.");
         System.out.println("Help Option Examples:");
-        System.out.println("\tjava LineCount -h" + "\tor,");
-        System.out.println("\tjava LineCount -help" + "\tor,");
-        System.out.println("\tjava LineCount -?");
+        System.out.println("\tjava CharCount -h" + "\tor,");
+        System.out.println("\tjava CharCount -help" + "\tor,");
+        System.out.println("\tjava CharCount -?");
         System.out.println();
     }
 
@@ -147,8 +145,8 @@ public class LineCounter extends Administrator implements ICounter {
     public void BannerOptionInformation() {
         System.out.println("-b, -banner\t" + "Passed with no arguments and displays version and copyright information.");
         System.out.println("Banner Option Examples:");
-        System.out.println("\tjava LineCount -b" + "\tor,");
-        System.out.println("\tjava LineCount -banner");
+        System.out.println("\tjava CharCount -b" + "\tor,");
+        System.out.println("\tjava CharCount -banner");
         System.out.println();
     }
 
@@ -156,14 +154,14 @@ public class LineCounter extends Administrator implements ICounter {
     public void VerboseOptionInformation() {
         System.out.println("-v, -verbose\t" + "Passed with one file source as an argument and displays the most detailed information about the file.");
         System.out.println("Verbose Option Examples:");
-        System.out.println("\tjava LineCount -v file1.txt" + "\tor,");
-        System.out.println("\tjava LineCount -verbose file2.txt");
+        System.out.println("\tjava CharCount -v file1.txt" + "\tor,");
+        System.out.println("\tjava CharCount -verbose file2.txt");
         System.out.println();
     }
 
     @Override
     public void BannerMessage() {
-        System.out.println("LineCounter Version 2.0.0.0");
+        System.out.println("CountChars Version 2.0.0.0");
         System.out.println("Copyright (C) Karim Rhoualem 2020. All Rights Reserved.");
         System.out.println("Written by Karim Rhoualem.");
         System.out.println();

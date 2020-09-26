@@ -1,4 +1,4 @@
-package CounterAdministratorTemplate;
+package administrator_template;
 
 public abstract class Administrator {
     public abstract void GeneralUsageInformation();

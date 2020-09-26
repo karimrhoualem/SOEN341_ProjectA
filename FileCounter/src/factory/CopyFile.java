@@ -1,27 +1,29 @@
-package CounterFactory;
+package factory;
 
-import CounterAdministratorTemplate.Administrator;
-import CounterCommandLineStrategy.BannerCommandLineOption;
-import CounterCommandLineStrategy.HelpCommandLineOption;
-import CounterCommandLineStrategy.NoCommandLineOption;
-import CounterCommandLineStrategy.VerboseCommandLineOption;
+import administrator_template.Administrator;
+import command_line_strategy.BannerCommandLineOption;
+import command_line_strategy.HelpCommandLineOption;
+import command_line_strategy.NoCommandLineOption;
+import command_line_strategy.VerboseCommandLineOption;
 
 import java.io.*;
 
-public class CharCounter extends Administrator implements ICounter {
-    private int _count;
+public class CopyFile extends Administrator implements IRunFactory {
+    int EOF = -1;
+    File srcFile = null;
+    File dstFile = null;
+    String srcFilename = "<srcFilename>";
+    String dstFilename = "<dstFilename>";
+    FileInputStream srcStream = null;
+    FileOutputStream dstStream = null;
 
     HelpCommandLineOption helpCommandLineOption = new HelpCommandLineOption();
     BannerCommandLineOption bannerCommandLineOption = new BannerCommandLineOption();
     VerboseCommandLineOption verboseCommandLineOption = new VerboseCommandLineOption();
     NoCommandLineOption noCommandLineOption = new NoCommandLineOption();
 
-    String srcFileName = null;
-    FileInputStream fileInputStream = null;
-    BufferedReader reader = null;
-
     @Override
-    public void Count(String[] args) {
+    public void CheckConditions(String[] args) {
         try {
             // Verify whether help or banner option has been specified from the command line.
             if (helpCommandLineOption.CheckOption(args)) {
@@ -33,12 +35,8 @@ public class CharCounter extends Administrator implements ICounter {
                 return;
             }
 
-            if (verboseCommandLineOption.CheckOption(args)) {
-                RunCounter(args);
-                return;
-            }
-            else if (noCommandLineOption.CheckOption(args)) {
-                RunCounter(args);
+            if (noCommandLineOption.CheckCopyOption(args)) {
+                Run(args);
                 return;
             }
 
@@ -61,8 +59,8 @@ public class CharCounter extends Administrator implements ICounter {
         }
         finally {
             try {
-                reader.close();
-                fileInputStream.close();
+                srcStream.close();
+                dstStream.close();
             }
             catch (NullPointerException npe) {
                 if (npe.getMessage() != null) {
@@ -86,49 +84,49 @@ public class CharCounter extends Administrator implements ICounter {
     }
 
     @Override
-    public void RunCounter(String[] args) throws IOException {
+    public void Run(String[] args) throws IOException {
+        if (args[0] != null) { // Check <src>
+            srcFilename = args[0];
 
-        if (args.length == 1) {
-            srcFileName = args[0];
-            fileInputStream = new FileInputStream((srcFileName));
-            reader = new BufferedReader(new InputStreamReader(fileInputStream));
+            srcFile = new File(srcFilename);
 
-            _count = 0;
-
-            while (reader.read() != -1) {
-                _count++;
+            if (!srcFile.canRead()) {
+                System.out.println("Copy: Cannot open srcFile '" + srcFilename + "'");
+                return;
             }
-
-            System.out.println("Total characters read: " + _count + ".");
         }
-        else if (args.length == 2) {
-            srcFileName = args[1];
-            fileInputStream = new FileInputStream((srcFileName));
-            reader = new BufferedReader(new InputStreamReader(fileInputStream));
 
-            _count = 0;
-
-            while (reader.read() != -1) {
-                _count++;
-            }
-
-            System.out.println("Total characters read: " + _count + ".");
-            Verbose(_count);
+        if (args[1] != null) { // Check <dst>
+            dstFilename = args[1];
+            dstFile = new File(dstFilename);
         }
+
+        srcStream = new FileInputStream(srcFile);
+        dstStream = new FileOutputStream(dstFile);
+
+        // Execute the copy.
+        System.out.println("Copying " + srcFilename + " to " + dstFilename + ".");
+
+        int c;
+
+        while ( (c = srcStream.read()) != EOF ) {
+            dstStream.write(c);
+            System.out.print('.');
+        }
+
+        System.out.println();
+        System.out.println("Copy: done.");
     }
 
     @Override
     public void Verbose(int count) {
-        for (int i = 0; i < count; i++) {
-            System.out.print('C');
-        }
     }
 
     @Override
     public void GeneralUsageInformation() {
-        System.out.println("CharCount <src>\t" + "Passed with one file source as an argument and no options. Displays information about the file.");
+        System.out.println("Copy <src> <dest>\t" + "Passed with two files, a source and an argument and no options. Copies the contents of the source file into the destination file..");
         System.out.println("General Usage Examples:");
-        System.out.println("\tjava CharCount file1.txt");
+        System.out.println("\tjava Copy file1.txt file2.txt");
         System.out.println();
     }
 
@@ -136,9 +134,9 @@ public class CharCounter extends Administrator implements ICounter {
     public void HelpOptionInformation() {
         System.out.println("-h, -?, -help\t" + "Passed with no arguments and displays helpful information.");
         System.out.println("Help Option Examples:");
-        System.out.println("\tjava CharCount -h" + "\tor,");
-        System.out.println("\tjava CharCount -help" + "\tor,");
-        System.out.println("\tjava CharCount -?");
+        System.out.println("\tjava Copy -h" + "\tor,");
+        System.out.println("\tjava Copy -help" + "\tor,");
+        System.out.println("\tjava Copy -?");
         System.out.println();
     }
 
@@ -146,23 +144,18 @@ public class CharCounter extends Administrator implements ICounter {
     public void BannerOptionInformation() {
         System.out.println("-b, -banner\t" + "Passed with no arguments and displays version and copyright information.");
         System.out.println("Banner Option Examples:");
-        System.out.println("\tjava CharCount -b" + "\tor,");
-        System.out.println("\tjava CharCount -banner");
+        System.out.println("\tjava Copy -b" + "\tor,");
+        System.out.println("\tjava Copy -banner");
         System.out.println();
     }
 
     @Override
     public void VerboseOptionInformation() {
-        System.out.println("-v, -verbose\t" + "Passed with one file source as an argument and displays the most detailed information about the file.");
-        System.out.println("Verbose Option Examples:");
-        System.out.println("\tjava CharCount -v file1.txt" + "\tor,");
-        System.out.println("\tjava CharCount -verbose file2.txt");
-        System.out.println();
     }
 
     @Override
     public void BannerMessage() {
-        System.out.println("CharCounter Version 2.0.0.0");
+        System.out.println("Copy Version 2.0.0.0");
         System.out.println("Copyright (C) Karim Rhoualem 2020. All Rights Reserved.");
         System.out.println("Written by Karim Rhoualem.");
         System.out.println();

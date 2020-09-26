@@ -1,4 +1,4 @@
-package CounterCommandLineStrategy;
+package command_line_strategy;
 
 public class VerboseCommandLineOption implements ICommandLineOptionStrategy {
 
