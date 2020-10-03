@@ -1,15 +1,29 @@
 package factory;
 
-public class WC extends CountChars {
-    CountChars countChars = new CountChars();
-    CountWords countWords = new CountWords();
-    CountLines countLines = new CountLines();
+import java.io.IOException;
 
-    public void Count(String[] args) {
-        countChars.CheckConditions(args);
+public class WC implements IConfigureCounter {
+    Factory factory = new Factory();
+    IConfigureCounter charCounter = factory.getFactoryType("CHARCOUNT");
+    IConfigureCounter wordCounter = factory.getFactoryType("WORDCOUNT");
+    IConfigureCounter lineCounter = factory.getFactoryType("LINECOUNT");
+
+    @Override
+    public void Run(String[] args) {
+        charCounter.Run(args);
         System.out.println("----------------------------------------------------------------------------------------");
-        countWords.CheckConditions(args);
+        wordCounter.Run(args);
         System.out.println("----------------------------------------------------------------------------------------");
-        countLines.CheckConditions(args);
+        lineCounter.Run(args);
+    }
+
+    @Override
+    public void StartCounter(String[] args) throws IOException {
+
+    }
+
+    @Override
+    public void Verbose(int count) {
+
     }
 }

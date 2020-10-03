@@ -1,13 +1,13 @@
 package programs;
 
 import factory.Factory;
-import factory.IRunFactory;
+import factory.IConfigureCounter;
 
 public class WC {
     public static void main(String[] args) {
         Factory factory = new Factory();
 
-        IRunFactory WC = factory.getFactoryType("WC");
-        WC.CheckConditions(args);
+        IConfigureCounter WC = factory.getFactoryType("WC");
+        WC.Run(args);
     }
 }

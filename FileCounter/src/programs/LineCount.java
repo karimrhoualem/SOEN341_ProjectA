@@ -1,13 +1,13 @@
 package programs;
 
 import factory.Factory;
-import factory.IRunFactory;
+import factory.IConfigureCounter;
 
 public class LineCount {
     public static void main(String[] args) {
         Factory factory = new Factory();
 
-        IRunFactory lineCounter = factory.getFactoryType("LINECOUNT");
-        lineCounter.CheckConditions(args);
+        IConfigureCounter lineCounter = factory.getFactoryType("LINECOUNT");
+        lineCounter.Run(args);
     }
 }

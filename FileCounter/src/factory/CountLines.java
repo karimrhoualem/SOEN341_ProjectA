@@ -1,90 +1,13 @@
 package factory;
 
-import administrator_template.Administrator;
-import command_line_strategy.BannerCommandLineOption;
-import command_line_strategy.HelpCommandLineOption;
-import command_line_strategy.NoCommandLineOption;
-import command_line_strategy.VerboseCommandLineOption;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-import java.io.*;
-
-public class CountLines extends Administrator implements IRunFactory {
-    private int _count;
-
-    HelpCommandLineOption helpCommandLineOption = new HelpCommandLineOption();
-    BannerCommandLineOption bannerCommandLineOption = new BannerCommandLineOption();
-    VerboseCommandLineOption verboseCommandLineOption = new VerboseCommandLineOption();
-    NoCommandLineOption noCommandLineOption = new NoCommandLineOption();
-
-    String srcFileName = null;
-    FileInputStream fileInputStream = null;
-    BufferedReader reader = null;
-
-    public void CheckConditions(String[] args) {
-        try {
-            if (helpCommandLineOption.CheckOption(args)) {
-                UsageMessage();
-                return;
-            }
-            else if (bannerCommandLineOption.CheckOption(args)) {
-                BannerMessage();
-                return;
-            }
-
-            if (verboseCommandLineOption.CheckOption(args)) {
-                Run(args);
-                return;
-            }
-            else if (noCommandLineOption.CheckOption(args)) {
-                Run(args);
-                return;
-            }
-
-            CatchAllErrorMessage();
-        }
-        catch (FileNotFoundException fnfe) {
-            System.out.println(fnfe.getMessage());
-            UsageMessage();
-            return;
-        }
-        catch (IOException ioe) {
-            System.out.println(ioe.getMessage());
-            UsageMessage();
-            return;
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            UsageMessage();
-            return;
-        }
-        finally {
-            try {
-                reader.close();
-                fileInputStream.close();
-            }
-            catch (NullPointerException npe) {
-                if (npe.getMessage() != null) {
-                    System.out.println(npe.getMessage());
-                }
-                return;
-            }
-            catch (IOException ioe) {
-                if (ioe.getMessage() != null) {
-                    System.out.println(ioe.getMessage());
-                }
-                return;
-            }
-            catch(Exception e) {
-                if (e.getMessage() != null) {
-                    System.out.println(e.getMessage());
-                }
-                return;
-            }
-        }
-    }
-
+public class CountLines extends Count implements IConfigureCounter {
     @Override
-    public void Run(String[] args) throws IOException {
+    public void StartCounter(String[] args) throws IOException {
         if (args.length == 1) {
             srcFileName = args[0];
             fileInputStream = new FileInputStream((srcFileName));
@@ -166,14 +89,6 @@ public class CountLines extends Administrator implements IRunFactory {
         System.out.println("CountLines Version 2.0.0.0");
         System.out.println("Copyright (C) Karim Rhoualem 2020. All Rights Reserved.");
         System.out.println("Written by Karim Rhoualem.");
-        System.out.println();
-    }
-
-    @Override
-    public void CatchAllErrorMessage() {
-        System.out.println();
-        System.out.println("Unforeseen error occurred.");
-        UsageMessage();
         System.out.println();
     }
 }

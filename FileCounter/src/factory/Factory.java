@@ -1,7 +1,7 @@
 package factory;
 
 public class Factory {
-    public IRunFactory getFactoryType(String counterType){
+    public IConfigureCounter getFactoryType(String counterType){
         if(counterType == null){
             return null;
         }

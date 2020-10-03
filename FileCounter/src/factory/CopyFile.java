@@ -1,14 +1,11 @@
 package factory;
 
 import administrator_template.Administrator;
-import command_line_strategy.BannerCommandLineOption;
-import command_line_strategy.HelpCommandLineOption;
-import command_line_strategy.NoCommandLineOption;
-import command_line_strategy.VerboseCommandLineOption;
+import command_line_strategy.*;
 
 import java.io.*;
 
-public class CopyFile extends Administrator implements IRunFactory {
+public class CopyFile extends Administrator implements IConfigureCounter {
     int EOF = -1;
     File srcFile = null;
     File dstFile = null;
@@ -17,26 +14,25 @@ public class CopyFile extends Administrator implements IRunFactory {
     FileInputStream srcStream = null;
     FileOutputStream dstStream = null;
 
-    HelpCommandLineOption helpCommandLineOption = new HelpCommandLineOption();
-    BannerCommandLineOption bannerCommandLineOption = new BannerCommandLineOption();
-    VerboseCommandLineOption verboseCommandLineOption = new VerboseCommandLineOption();
-    NoCommandLineOption noCommandLineOption = new NoCommandLineOption();
+    Context helpOption = new Context(new HelpOptionStrategy());
+    Context bannerOption = new Context(new BannerOptionStrategy());
+    Context noOption = new Context(new NoOptionStrategy());
 
     @Override
-    public void CheckConditions(String[] args) {
+    public void Run(String[] args) {
         try {
             // Verify whether help or banner option has been specified from the command line.
-            if (helpCommandLineOption.CheckOption(args)) {
+            if (helpOption.executeStrategy(args)) {
                 UsageMessage();
                 return;
             }
-            else if (bannerCommandLineOption.CheckOption(args)) {
+            else if (bannerOption.executeStrategy(args)) {
                 BannerMessage();
                 return;
             }
 
-            if (noCommandLineOption.CheckCopyOption(args)) {
-                Run(args);
+            if (noOption.executeCopyStrategy(args)) {
+                StartCounter(args);
                 return;
             }
 
@@ -84,7 +80,7 @@ public class CopyFile extends Administrator implements IRunFactory {
     }
 
     @Override
-    public void Run(String[] args) throws IOException {
+    public void StartCounter(String[] args) throws IOException {
         if (args[0] != null) { // Check <src>
             srcFilename = args[0];
 
