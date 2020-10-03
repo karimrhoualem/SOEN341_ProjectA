@@ -17,21 +17,26 @@ public class CopyFile extends Administrator implements IConfigureCounter {
     Context helpOption = new Context(new HelpOptionStrategy());
     Context bannerOption = new Context(new BannerOptionStrategy());
     Context noOption = new Context(new NoOptionStrategy());
+    Context verboseOption = new Context(new VerboseOptionStrategy());
 
     @Override
     public void Run(String[] args) {
         try {
             // Verify whether help or banner option has been specified from the command line.
-            if (helpOption.executeStrategy(args)) {
+            if (helpOption.executeCopyStrategy(args)) {
                 UsageMessage();
                 return;
             }
-            else if (bannerOption.executeStrategy(args)) {
+            else if (bannerOption.executeCopyStrategy(args)) {
                 BannerMessage();
                 return;
             }
 
-            if (noOption.executeCopyStrategy(args)) {
+            if (verboseOption.executeCopyStrategy(args)) {
+                StartCounter(args);
+                return;
+            }
+            else if (noOption.executeCopyStrategy(args)) {
                 StartCounter(args);
                 return;
             }
@@ -81,37 +86,75 @@ public class CopyFile extends Administrator implements IConfigureCounter {
 
     @Override
     public void StartCounter(String[] args) throws IOException {
-        if (args[0] != null) { // Check <src>
-            srcFilename = args[0];
+        if (args.length == 2) {
+            int length = args.length;
 
-            srcFile = new File(srcFilename);
+            if (args[0] != null) { // Check <src>
+                srcFilename = args[0];
 
-            if (!srcFile.canRead()) {
-                System.out.println("Copy: Cannot open srcFile '" + srcFilename + "'");
-                return;
+                srcFile = new File(srcFilename);
+
+                if (!srcFile.canRead()) {
+                    System.out.println("Copy: Cannot open srcFile '" + srcFilename + "'");
+                    return;
+                }
             }
+
+            if (args[1] != null) { // Check <dst>
+                dstFilename = args[1];
+                dstFile = new File(dstFilename);
+            }
+
+            srcStream = new FileInputStream(srcFile);
+            dstStream = new FileOutputStream(dstFile);
+
+            // Execute the copy.
+            System.out.println("Copying " + srcFilename + " to " + dstFilename + ".");
+
+            int c;
+
+            while ( (c = srcStream.read()) != EOF ) {
+                dstStream.write(c);
+            }
+
+            System.out.println();
+            System.out.println("Copy: done.");
         }
+        else if (args.length == 3) {
+            int length = args.length;
 
-        if (args[1] != null) { // Check <dst>
-            dstFilename = args[1];
-            dstFile = new File(dstFilename);
+            if (args[1] != null) { // Check <src>
+                srcFilename = args[1];
+
+                srcFile = new File(srcFilename);
+
+                if (!srcFile.canRead()) {
+                    System.out.println("Copy: Cannot open srcFile '" + srcFilename + "'");
+                    return;
+                }
+            }
+
+            if (args[1] != null) { // Check <dst>
+                dstFilename = args[2];
+                dstFile = new File(dstFilename);
+            }
+
+            srcStream = new FileInputStream(srcFile);
+            dstStream = new FileOutputStream(dstFile);
+
+            // Execute the copy.
+            System.out.println("Copying " + srcFilename + " to " + dstFilename + ".");
+
+            int c;
+
+            while ( (c = srcStream.read()) != EOF ) {
+                dstStream.write(c);
+                System.out.print('.');
+            }
+
+            System.out.println();
+            System.out.println("Copy: done.");
         }
-
-        srcStream = new FileInputStream(srcFile);
-        dstStream = new FileOutputStream(dstFile);
-
-        // Execute the copy.
-        System.out.println("Copying " + srcFilename + " to " + dstFilename + ".");
-
-        int c;
-
-        while ( (c = srcStream.read()) != EOF ) {
-            dstStream.write(c);
-            System.out.print('.');
-        }
-
-        System.out.println();
-        System.out.println("Copy: done.");
     }
 
     @Override

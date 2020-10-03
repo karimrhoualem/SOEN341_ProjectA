@@ -9,6 +9,6 @@ public class VerboseOptionStrategy implements IOptionStrategy {
 
     @Override
     public boolean CheckCopyOption(String[] args) {
-        return false;
+        return (args.length == 3 && (args[0].equals("-v") || args[0].equals("-verbose"))) ? true : false;
     }
 }
