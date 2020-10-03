@@ -64,6 +64,7 @@ public class CountWords extends Count implements IConfigureCounter {
         for (int i = 0; i < count; i++) {
             System.out.print('W');
         }
+        System.out.println();
     }
 
     @Override

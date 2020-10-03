@@ -46,6 +46,7 @@ public class CountLines extends Count implements IConfigureCounter {
         for (int i = 0; i < count; i++) {
             System.out.print('L');
         }
+        System.out.println();
     }
 
     @Override

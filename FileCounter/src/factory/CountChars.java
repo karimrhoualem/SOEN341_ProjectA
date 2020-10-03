@@ -42,6 +42,7 @@ public class CountChars extends Count implements IConfigureCounter {
         for (int i = 0; i < count; i++) {
             System.out.print('C');
         }
+        System.out.println();
     }
 
     @Override

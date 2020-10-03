@@ -46,17 +46,17 @@ public abstract class Count extends Administrator implements IConfigureCounter {
         catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
             UsageMessage();
-            return;
+            System.exit(0);
         }
         catch (IOException ioe) {
             System.out.println(ioe.getMessage());
             UsageMessage();
-            return;
+            System.exit(0);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
             UsageMessage();
-            return;
+            System.exit(0);
         }
         finally {
             try {
